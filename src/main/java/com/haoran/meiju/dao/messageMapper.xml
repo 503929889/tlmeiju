@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoran.meiju.dao.IMessageDao">
+	<select id="getAll" resultMap="TitleMap">
+		select * from message
+	</select>
+	<resultMap type="Title" id="TitleMap">
+         <id property="titleId" column="titleId"/>
+         <association property="type" column="typeId" javaType="Type" select="qgetById"/>
+    </resultMap>
+    <select id="qgetById" parameterType="int" resultType="Type">
+		select * from message where typeId=#{0}
+	</select>
+	<select id="getById" resultMap="TitleMap">
+		select * from message where titleId=#{0}
+	</select>
+	<select id="getByName" resultType="Title">
+		select * from message where titleName=#{0}
+	</select>
+	<select id="getPage" resultMap="TitleMap">
+		select * from message limit #{0},#{1}
+	</select>
+	<select id="countAll" resultType="int">
+		select count(titleId) from message
+	</select>
+	
+	<!-- private -->
+	<select id="countByTitle" resultType="int">
+		select count(titleId) from message where titleId=#{0}
+	</select>
+	
+	<select id="getPageByTitle" resultType="Message">
+		select * from message where titleId=#{0} limit #{1},#{2}
+	</select>
+	
+	<insert id="saveMsg" parameterType="Message">
+		insert into message(
+		<include refid="key" />
+		) values(
+		<include refid="value" />
+		);
+	</insert>
+	
+	<!-- Msg插入sql片段 -->
+	<sql id="key">
+		<trim suffixOverrides=",">
+			<if test="titleId!=null">
+				titleId,
+			</if>
+			<if test="user!=null">
+				user,
+			</if>
+			<if test="submitTime!=null">
+				submitTime,
+			</if>
+			<if test="content!=null">
+				content,
+			</if>
+		</trim>
+	</sql>
+
+	<sql id="value">
+		<trim suffixOverrides=",">
+			<if test="titleId!=null">
+				#{titleId},
+			</if>
+			<if test="user!=null">
+				#{user},
+			</if>
+			<if test="submitTime!=null">
+				#{submitTime},
+			</if>
+			<if test="content!=null">
+				#{content},
+			</if>
+		</trim>
+	</sql>
+</mapper>

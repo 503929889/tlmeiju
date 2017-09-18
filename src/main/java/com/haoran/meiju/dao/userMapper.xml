@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoran.meiju.dao.IUserDao">
+	<select id="getAll" resultMap="TitleMap">
+		select * from title
+	</select>
+	<resultMap type="Title" id="TitleMap">
+		<id property="titleId" column="titleId" />
+		<association property="type" column="typeId" javaType="Type"
+			select="qgetById" />
+	</resultMap>
+	<select id="qgetById" parameterType="int" resultType="Type">
+		select *
+		from type where typeId=#{0}
+	</select>
+	<select id="getById" resultType="User">
+		select * from title where
+		titleId=#{0}
+	</select>
+	<select id="getByName" resultType="User">
+		select * from user where
+		username=#{0}
+	</select>
+	<select id="getPage" resultMap="TitleMap">
+		select * from title limit
+		#{0},#{1}
+	</select>
+	<select id="countAll" resultType="int">
+		select count(titleId) from
+		title
+	</select>
+
+
+	<!-- private -->
+	<select id="countByUsernameAndPassword" resultType="int">
+		select
+		count(username) from user where username=#{0} and password=#{1}
+	</select>
+
+	<select id="countByUsername" resultType="int">
+		select count(username)
+		from user where username=#{0}
+	</select>
+	<insert id="saveUser" parameterType="User">
+		insert into user(
+		<include refid="key" />
+		) values(
+		<include refid="value" />
+		);
+	</insert>
+
+
+	<!-- User插入sql片段 -->
+	<sql id="key">
+		<trim suffixOverrides=",">
+			<if test="username!=null">
+				username,
+			</if>
+			<if test="password!=null">
+				password,
+			</if>
+			<if test="nickname!=null">
+				nickname,
+			</if>
+			<if test="email!=null">
+				email,
+			</if>
+			<if test="head_thumb!=null">
+				head_thumb,
+			</if>
+			<if test="user_desc!=null">
+				user_desc,
+			</if>
+			<if test="mobile!=null">
+				mobile,
+			</if>
+		</trim>
+	</sql>
+
+	<sql id="value">
+		<trim suffixOverrides=",">
+			<if test="username!=null">
+				#{username},
+			</if>
+			<if test="password!=null">
+				#{password},
+			</if>
+			<if test="nickname!=null">
+				#{nickname},
+			</if>
+			<if test="email!=null">
+				#{email},
+			</if>
+			<if test="head_thumb!=null">
+				#{head_thumb},
+			</if>
+			<if test="user_desc!=null">
+				#{user_desc},
+			</if>
+			<if test="mobile!=null">
+				#{mobile},
+			</if>
+		</trim>
+	</sql>
+
+</mapper>

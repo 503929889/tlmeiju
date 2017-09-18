@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*     顶部     */
+.head-logo{
+	border-radius:4px;
+	height:90px;
+	text-align:center;
+	background: #2F2F2F;
+	}
+.home-logo{
+	display:none;}
+.logo-pic{
+	padding-top:6px;
+	padding-left:50px;
+	float:left;
+	}
+.head-right{
+	float:right;
+	}
+.right-top{
+	margin-right:-250px;
+}
+.right-top a{
+	font-size:18px;
+	color:#0080FF}
+.head-input{
+	padding-right:100px;
+	width:550px;
+	}
+ @media (max-width: 768px) {
+	.head-input{
+		padding-left:100px;
+		margin-right:-80px;
+		}
+	.home-logo{
+		display:block;
+		position:absolute; 
+		padding-top:2px; 
+		padding-left:-20px;
+		 }
+	.logo-pic{
+			display:none;
+			}
+	.right-top{
+		margin-right:-330px;
+	}	
+}
+ @media (max-width: 1200px) {
+ 	.home-logo{
+		display:block;
+		position:absolute; 
+		padding-top:2px; 
+		padding-left:-20px;
+		 }
+	.logo-pic{
+			display:none;
+			}
+	#index-first{
+		display:none;
+		}
+ }
+/*     导航     */	
+.head-nav{
+	margin-top:90px;
+	font-size:22;
+	text-align:center;
+	}
+.head-nav li{
+	margin-left:38px;
+	}
+/*		底部		*/
+.footer{
+	border:1px solid #666;
+	width:100%;
+	height:30px;
+	}

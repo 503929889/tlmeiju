@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoran.meiju.dao.IUsersDao">
+	<select id="cByNickName" resultType="int">
+		select count(id) from users
+		where nickname=#{0}
+	</select>
+
+	<select id="findIdByName" resultType="int">
+		select id
+		from users where
+		nickname=#{0}
+	</select>
+
+	<insert id="saveUser" parameterType="Users">
+		insert into users(
+		<include refid="key" />
+		,reg_time
+		) values(
+		<include refid="value" />
+		,now()
+		);
+	</insert>
+
+	<!-- User插入sql片段 -->
+	<sql id="key">
+		<trim suffixOverrides=",">
+			<if test="nickname!=null">
+				nickname,
+			</if>
+			<if test="head_thumb!=null">
+				head_thumb,
+			</if>
+			<if test="user_desc!=null">
+				user_desc,
+			</if>
+			<if test="birthday!=null">
+				birthday,
+			</if>
+			<if test="reg_ip!=null">
+				reg_ip,
+			</if>
+		</trim>
+	</sql>
+
+	<sql id="value">
+		<trim suffixOverrides=",">
+			<if test="nickname!=null">
+				#{nickname},
+			</if>
+			<if test="head_thumb!=null">
+				#{head_thumb},
+			</if>
+			<if test="user_desc!=null">
+				#{user_desc},
+			</if>
+			<if test="birthday!=null">
+				#{birthday},
+			</if>
+			<if test="reg_ip!=null">
+				#{reg_ip},
+			</if>
+		</trim>
+	</sql>
+
+</mapper>

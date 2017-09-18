@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+.badge-st{
+	 margin-top:2px;
+	}
+.badge-st span{
+	position: absolute;
+	margin-left:-6px;
+	float:left;
+	background: #D1D1D1;
+	}
+.badge-st a{
+	color:#000;
+	text-decoration:none;
+	margin-left:25px;
+	}
+.badge-st p{
+	display:inline;
+	float:right;
+	}
+	
+a {
+	color:#3D3D3D;
+	text-decoration:none;
+	cursor:pointer;
+}
+a:hover {
+	text-decoration:none;
+	color:#FF7E00;
+}
+
