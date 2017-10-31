@@ -45,13 +45,19 @@ public class UserController {
 	// private TitleServiceImpl titleService;
 
 	@RequestMapping("/login")
-	@ResponseBody
+	//@ResponseBody
 	public String login(String username, String password, HttpSession session) {
 		if (userService.login(username, password)) {
 			session.setAttribute("username", username);
-			return "success";
+			return "redirect:manager";
 		}
 		return "error";
+	}
+	
+	@RequestMapping("/manager")
+	//@ResponseBody
+	public String manager(HttpSession session) {
+		return "managerList";
 	}
 
 	@RequestMapping("/exitLogin")
